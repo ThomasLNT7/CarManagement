@@ -1,36 +1,28 @@
 console.log("Début du script");
 
-######################
-## Mise à jour état ##
-######################
+document.addEventListener("DOMContentLoaded", function() {
+    var openPopupBtn = document.getElementById("openPopupBtn");
+    var closePopupBtn = document.getElementById("closePopupBtn");
+    var popup = document.getElementById("popup");
 
-/**
- * Mettre à jour l'état de la voiture via une requête AJAX.
- * @param {string} carId - L'identifiant de la voiture
- * @param {string} newState - Le nouvel état de la voiture
- */
-function updateCarState(carId, newState) {
-    fetch('/cars/update-state/' + carId, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            'state': newState
-        })
-    }).then(response => {
-        if (response.ok) {
-            console.log('État de la voiture mis à jour avec succès');
-            location.reload();  // Recharger la page pour voir les modifications
-        } else {
-            console.error('Échec de la mise à jour de l\'état');
+    // Ouvrir la popup
+    openPopupBtn.addEventListener("click", function() {
+        console.log("click");
+        popup.style.display = "block";
+    });
+
+    // Fermer la popup en cliquant sur la croix
+    closePopupBtn.addEventListener("click", function() {
+        popup.style.display = "none";
+    });
+
+    // Fermer la popup en cliquant en dehors de son contenu
+    window.addEventListener("click", function(event) {
+        if (event.target === popup) {
+            popup.style.display = "none";
         }
-    }).catch(error => console.error('Erreur :', error));
-}
-
-######################
-## Gestion Drag/Drop ##
-######################
+    });
+});
 
 /**
  * Permettre le drop d'un élément dans une zone de dépôt.

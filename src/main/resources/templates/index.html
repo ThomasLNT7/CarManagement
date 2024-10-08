@@ -38,6 +38,11 @@
       <label for="emptyingDate">Date de vidange :</label>
       <input type="date" id="emptyingDate" name="emptyingDate" required>
 
+      <label for="color">Couleur :</label>
+      <select id="color" name="color">
+        <option th:each="color : ${carColors}" th:value="${color}" th:text="${color.displayName}"></option>
+      </select>
+
       <label for="state">État :</label>
       <select id="state" name="state">
         <option th:each="state : ${carStates}" th:value="${state}" th:text="${state.displayName}"></option>
@@ -65,7 +70,8 @@
       <!-- Cartes des voitures -->
       <div class="car-card" th:each="car : ${cars}" th:if="${car.state == state}"
            draggable="true" ondragstart="drag(event)"
-           th:attr="data-id=${car.id}">
+           th:attr="data-id=${car.id}"
+           th:style="'background-image: url(' + @{/skins/} + ${car.color.name().toLowerCase()} + '.png); background-size: cover; background-position: center;'">
         <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
         <p>État actuel : <span th:text="${car.state.displayName}"></span></p>
 

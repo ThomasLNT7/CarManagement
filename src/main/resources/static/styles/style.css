@@ -94,6 +94,8 @@ h1 {
     width: 90%; /* Occuper 90% de la largeur du container */
     text-align: center;
     transition: transform 0.2s ease;
+    background-size: cover; /* Couvrir entièrement la carte */
+    background-position: center; /* Centrer l'image */
 }
 
 /* Griser le fond pendant le drag */
@@ -176,4 +178,3 @@ form button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
 }
-

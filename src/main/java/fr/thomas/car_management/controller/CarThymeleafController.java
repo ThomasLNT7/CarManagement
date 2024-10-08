@@ -1,6 +1,7 @@
 package fr.thomas.car_management.controller;
 
 import fr.thomas.car_management.entity.Car;
+import fr.thomas.car_management.entity.CarColorEnum;
 import fr.thomas.car_management.entity.CarStateEnum;
 import fr.thomas.car_management.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class CarThymeleafController {
         List<Car> cars =carService.getAllCars();
         model.addAttribute("cars", cars);
         model.addAttribute("carStates", CarStateEnum.values());
+        model.addAttribute("carColors", CarColorEnum.values());
         return "index";
     }
 
