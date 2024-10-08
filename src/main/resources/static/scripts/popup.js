@@ -24,6 +24,24 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+// EXTRA INFO
+document.addEventListener("DOMContentLoaded", function() {
+    var toggleExtraInfoBtn = document.getElementById("toggleExtraInfo");
+    var extraInfoSection = document.getElementById("extraInfo");
+
+    // Toggle pour afficher/masquer la section des informations supplémentaires
+    toggleExtraInfoBtn.addEventListener("click", function() {
+        if (extraInfoSection.style.display === "none") {
+            extraInfoSection.style.display = "block";
+            toggleExtraInfoBtn.textContent = "Masquer les informations supplémentaires";
+        } else {
+            extraInfoSection.style.display = "none";
+            toggleExtraInfoBtn.textContent = "Afficher les informations supplémentaires";
+        }
+    });
+});
+
+
 /**
  * Permettre le drop d'un élément dans une zone de dépôt.
  * @param {Event} ev - L'événement dragover

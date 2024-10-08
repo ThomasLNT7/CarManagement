@@ -124,18 +124,21 @@ body.dragging .car-list.drop-highlight {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
     backdrop-filter: blur(5px); /* Effet de flou */
+    overflow: hidden; /* Empêche le défilement global */
 }
 
-/* Contenu de la popup */
+/* Contenu de la popup avec défilement si nécessaire */
 .popup-content {
     background-color: #fff;
-    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
+    max-height: 80vh; /* Limiter la hauteur de la popup à 80% de la hauteur de l'écran */
+    overflow-y: auto; /* Activer le défilement vertical si le contenu dépasse */
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     position: relative;
+    margin: 5% auto; /* Centrer la popup horizontalement */
 }
 
 /* Bouton de fermeture (croix) */
@@ -177,4 +180,8 @@ form button[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#extraInfo {
+  transition: max-height 0.3s ease-in-out;
 }

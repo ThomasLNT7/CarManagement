@@ -11,6 +11,7 @@ public class Car {
     private Long id;
     private String brand;
     private String model;
+    private String immatriculation;
     private String purchase_date;
     private String technical_control_date;
     private String emptying_date;
@@ -23,7 +24,7 @@ public class Car {
 
     public Car() {}
 
-    public Car(String brand, String model, String purchase_date, String technical_control_date, String emptying_date, String state) {
+    public Car(String brand, String model, String purchase_date, String technical_control_date, String emptying_date, String state, String color, String immatriculation) {
         this.brand = brand;
         this.model = model;
         this.purchase_date = purchase_date;
@@ -31,6 +32,7 @@ public class Car {
         this.emptying_date = emptying_date;
         this.state = CarStateEnum.valueOf(state);
         this.color = CarColorEnum.valueOf(String.valueOf(color));
+        this.immatriculation = immatriculation;
     }
 
     public Long getId() {
@@ -99,6 +101,14 @@ public class Car {
 
     public String getSkinUrl() {
         return this.color.getSkinUrl();
+    }
+
+    public String getImmatriculation() {
+        return immatriculation;
+    }
+
+    public void setImmatriculation(String immatriculation) {
+        this.immatriculation = immatriculation;
     }
 
 
