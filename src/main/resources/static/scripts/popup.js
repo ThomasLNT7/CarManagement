@@ -1,34 +1,5 @@
 console.log("Début du script");
 
-#################
-###### POPUP #####
-#################
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    var openPopupBtn = document.getElementById("openPopupBtn");
-    var closePopupBtn = document.getElementById("closePopupBtn");
-    var popup = document.getElementById("popup");
-
-    // Ouvrir la popup
-    openPopupBtn.addEventListener("click", function() {
-        console.log("click")
-        popup.style.display = "block";
-    });
-
-    // Fermer la popup en cliquant sur la croix
-    closePopupBtn.addEventListener("click", function() {
-        popup.style.display = "none";
-    });
-
-    // Fermer la popup en cliquant en dehors de son contenu
-    window.addEventListener("click", function(event) {
-        if (event.target === popup) {
-            popup.style.display = "none";
-        }
-    });
-});
-
 ######################
 ## Mise à jour état ##
 ######################
