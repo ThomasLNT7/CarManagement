@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail de la voiture</title>
+  <link rel="stylesheet" href="../styles/car-details-style.css">
+</head>
+<body>
+<div class="detail-container">
+  <div class="car-detail-card">
+    <h2 th:text="${car.brand} + ' ' + ${car.model}"></h2>
+    <p><strong>Date d'achat :</strong> <span th:text="${car.purchaseDate}"></span></p>
+    <p><strong>Date du contrôle technique :</strong> <span th:text="${car.technicalControlDate}"></span></p>
+    <p><strong>Date de vidange :</strong> <span th:text="${car.emptyingDate}"></span></p>
+    <p><strong>État :</strong> <span th:text="${car.state}"></span></p>
+    <div class="btn-container">
+      <a href="/cars" class="back-button">Retour à la liste</a>
+      <a href="#" class="update-button">Modifier</a>
+      <a th:href="@{/cars/delete/{id}(id=${car.id})}" class="delete-button">Supprimer</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

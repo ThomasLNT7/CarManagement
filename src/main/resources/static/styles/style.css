@@ -1,0 +1,179 @@
+/* Global */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Titre */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Centrage du bouton pour ouvrir la popup */
+.center-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+/* Bouton Ajouter une voiture */
+.btn {
+    padding: 12px 24px;
+    background-color: #90caf9;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #64b5f6;
+}
+
+/* Container pour les états */
+.states-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Liste de voitures */
+.car-list {
+    width: 300px; /* Élargir pour que les cartes aient un espace suffisant */
+    min-height: 200px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Conteneur vide pour les tableaux vides */
+.empty-placeholder {
+    background-color: #e0e0e0;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-style: italic;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+/* Surligner la zone de dépôt lors du dragover */
+.drop-highlight {
+    background-color: #cce7ff;
+    border: 2px dashed #007bff;
+}
+
+/* Carte de voiture */
+.car-card {
+    background-color: #e0f7fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: move;
+    width: 90%; /* Occuper 90% de la largeur du container */
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+/* Griser le fond pendant le drag */
+body.dragging {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dragging .car-list {
+    opacity: 0.5;
+}
+
+/* Zones actives (non grisées) pour le drop */
+body.dragging .car-list.drop-highlight {
+    opacity: 1;
+    background-color: #cce7ff;
+}
+
+/* Masquer la popup par défaut */
+.popup {
+    display: none; /* La popup est masquée par défaut */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
+    backdrop-filter: blur(5px); /* Effet de flou */
+}
+
+/* Contenu de la popup */
+.popup-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Bouton de fermeture (croix) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Formulaire dans la popup */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #333;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #90caf9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

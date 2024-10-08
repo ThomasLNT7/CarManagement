@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Manager</title>
+  <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+
+<h1>Liste des voitures par état</h1>
+
+<div class="center-container">
+  <button class="btn" id="openPopupBtn" type="button">Ajouter une voiture</button>
+</div>
+
+<!-- Contenu de la popup -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <!-- Bouton pour fermer la popup (croix) -->
+    <span class="close-btn" id="closePopupBtn">&times;</span>
+    <h2>Ajouter une voiture</h2>
+
+    <!-- Formulaire d'ajout de voiture -->
+    <form th:action="@{/cars/add}" method="post">
+      <label for="brand">Marque :</label>
+      <input type="text" id="brand" name="brand" required>
+
+      <label for="model">Modèle :</label>
+      <input type="text" id="model" name="model" required>
+
+      <label for="purchaseDate">Date d'achat :</label>
+      <input type="date" id="purchaseDate" name="purchaseDate" required>
+
+      <label for="technicalControlDate">Date du contrôle technique :</label>
+      <input type="date" id="technicalControlDate" name="technicalControlDate" required>
+
+      <label for="emptyingDate">Date de vidange :</label>
+      <input type="date" id="emptyingDate" name="emptyingDate" required>
+
+      <label for="state">État :</label>
+      <select id="state" name="state">
+        <option th:each="state : ${carStates}" th:value="${state}" th:text="${state.displayName}"></option>
+      </select>
+
+      <button type="submit">Ajouter</button>
+    </form>
+  </div>
+</div>
+
+<!-- Conteneur des états -->
+<div class="states-container">
+  <div th:each="state : ${carStates}">
+    <h2 th:text="${state.displayName}"></h2>
+
+    <!-- Liste des voitures par état -->
+    <div class="car-list" th:attr="data-state=${state}"
+         ondrop="drop(event)"
+         ondragover="allowDrop(event)"
+         ondragleave="resetDropHighlight(event)">
+
+      <!-- Placeholder pour les tableaux vides -->
+      <div class="empty-placeholder" th:if="${#lists.isEmpty(cars)}">Déposez ici</div>
+
+      <!-- Cartes des voitures -->
+      <div class="car-card" th:each="car : ${cars}" th:if="${car.state == state}"
+           draggable="true" ondragstart="drag(event)"
+           th:attr="data-id=${car.id}">
+        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+        <p>État actuel : <span th:text="${car.state.displayName}"></span></p>
+
+        <a th:href="@{/cars/{id}(id=${car.id})}">
+          <button type="button">Voir</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lien vers le script popup.js -->
+<script src="../scripts/popup.js"></script>
+
+</body>
+</html>
