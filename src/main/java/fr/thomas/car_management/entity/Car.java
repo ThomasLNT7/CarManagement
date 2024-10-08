@@ -18,6 +18,9 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private CarStateEnum state;
 
+    @Enumerated(EnumType.STRING)
+    private CarColorEnum color;
+
     public Car() {}
 
     public Car(String brand, String model, String purchase_date, String technical_control_date, String emptying_date, String state) {
@@ -27,6 +30,7 @@ public class Car {
         this.technical_control_date = technical_control_date;
         this.emptying_date = emptying_date;
         this.state = CarStateEnum.valueOf(state);
+        this.color = CarColorEnum.valueOf(String.valueOf(color));
     }
 
     public Long getId() {
@@ -83,6 +87,18 @@ public class Car {
 
     public void setState(String state) {
         this.state = CarStateEnum.valueOf(state);
+    }
+
+    public CarColorEnum getColor() {
+        return color;
+    }
+
+    public void setColor(CarColorEnum color) {
+        this.color = color;
+    }
+
+    public String getSkinUrl() {
+        return this.color.getSkinUrl();
     }
 
 

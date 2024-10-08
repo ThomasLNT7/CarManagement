@@ -1,10 +1,5 @@
 console.log("Début du script");
 
-#################
-###### POPUP #####
-#################
-
-
 document.addEventListener("DOMContentLoaded", function() {
     var openPopupBtn = document.getElementById("openPopupBtn");
     var closePopupBtn = document.getElementById("closePopupBtn");
@@ -12,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Ouvrir la popup
     openPopupBtn.addEventListener("click", function() {
-        console.log("click")
+        console.log("click");
         popup.style.display = "block";
     });
 
@@ -28,38 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-######################
-## Mise à jour état ##
-######################
-
-/**
- * Mettre à jour l'état de la voiture via une requête AJAX.
- * @param {string} carId - L'identifiant de la voiture
- * @param {string} newState - Le nouvel état de la voiture
- */
-function updateCarState(carId, newState) {
-    fetch('/cars/update-state/' + carId, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            'state': newState
-        })
-    }).then(response => {
-        if (response.ok) {
-            console.log('État de la voiture mis à jour avec succès');
-            location.reload();  // Recharger la page pour voir les modifications
-        } else {
-            console.error('Échec de la mise à jour de l\'état');
-        }
-    }).catch(error => console.error('Erreur :', error));
-}
-
-######################
-## Gestion Drag/Drop ##
-######################
 
 /**
  * Permettre le drop d'un élément dans une zone de dépôt.
