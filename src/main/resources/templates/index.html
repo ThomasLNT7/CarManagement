@@ -67,7 +67,6 @@
   <div th:each="state : ${carStates}">
     <h2 th:text="${state.displayName}"></h2>
 
-    <!-- Liste des voitures par état -->
     <div class="car-list" th:attr="data-state=${state}"
          ondrop="drop(event)"
          ondragover="allowDrop(event)"
@@ -78,14 +77,17 @@
 
       <!-- Cartes des voitures -->
       <div class="car-card" th:each="car : ${cars}" th:if="${car.state == state}"
-           draggable="true" ondragstart="drag(event)"
-           th:attr="data-id=${car.id}"
-           th:style="'background-image: url(' + @{/skins/} + ${car.color.name().toLowerCase()} + '.png); background-size: cover; background-position: center;'">
-        <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+           draggable="true" ondragstart="drag(event)" ondblclick="redirectToDetail(this)"
+           th:attr="data-id=${car.id}">
 
-        <a th:href="@{/cars/{id}(id=${car.id})}">
-          <button type="button">Voir</button>
-        </a>
+        <!-- Image de la voiture -->
+        <img th:src="@{/../images/} + ${car.color.name().toLowerCase()} + '.png'"
+             alt="Image de la voiture" style="width: 100%; max-width: 150px; height: auto; object-fit: contain;" draggable="false">
+
+        <!-- Contenu de la carte -->
+        <div class="car-card-content">
+          <h3 th:text="${car.brand} + ' ' + ${car.model}"></h3>
+        </div>
       </div>
     </div>
   </div>

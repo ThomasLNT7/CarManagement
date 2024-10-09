@@ -22,6 +22,16 @@ document.addEventListener("DOMContentLoaded", function() {
             popup.style.display = "none";
         }
     });
+
+    const buttons = document.querySelectorAll('.button-group button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
 });
 
 // EXTRA INFO
@@ -105,5 +115,14 @@ function drop(ev) {
 document.addEventListener('dragend', function() {
     document.body.classList.remove('dragging'); // Réinitialiser les styles globaux
 });
+
+function redirectToDetail(element) {
+    const carId = element.getAttribute('data-id');
+    if (carId) {
+      window.location.href = '/cars/' + carId;
+    } else {
+      console.error('ID de la voiture non trouvé');
+    }
+}
 
 console.log("Fin du script");

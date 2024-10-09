@@ -7,19 +7,27 @@
   <link rel="stylesheet" href="../styles/car-details-style.css">
 </head>
 <body>
-<div class="detail-container">
-  <div class="car-detail-card">
-    <h2 th:text="${car.brand} + ' ' + ${car.model}"></h2>
-    <p><strong>Date d'achat :</strong> <span th:text="${car.purchaseDate}"></span></p>
-    <p><strong>Date du contrôle technique :</strong> <span th:text="${car.technicalControlDate}"></span></p>
-    <p><strong>Date de vidange :</strong> <span th:text="${car.emptyingDate}"></span></p>
-    <p><strong>État :</strong> <span th:text="${car.state}"></span></p>
-    <div class="btn-container">
-      <a href="/cars" class="back-button">Retour à la liste</a>
-      <a href="#" class="update-button">Modifier</a>
-      <a th:href="@{/cars/delete/{id}(id=${car.id})}" class="delete-button">Supprimer</a>
+  <div class="container">
+    <div class="car-image">
+      <img th:src="@{/../images/} + ${car.color.name().toLowerCase()} + '.png'" style="width: 100%; max-width: 150px; height: auto; object-fit: contain;" alt="Voiture Vue de Dessus">
+    </div>
+    <div class="details">
+      <h2>Marque: Tesla - Modèle: Model S</h2>
+      <div class="info">
+        <p><span>Date d'achat :</span> 01/03/2020</p>
+        <p><span>Contrôle technique :</span> 15/09/2024</p>
+        <p><span>Prochaine vidange :</span> 01/06/2024</p>
+        <p><span>État :</span> En Service</p>
+        <p><span>Couleur :</span> Rouge</p>
+      </div>
+      <div class="button-group">
+        <button><i class="fas fa-edit"></i> Modifier</button>
+        <button><i class="fas fa-trash"></i> Supprimer</button>
+      </div>
     </div>
   </div>
-</div>
+
+  <script src="../scripts/car-details.js"></script>
+
 </body>
 </html>

@@ -4,7 +4,7 @@ public enum CarColorEnum {
     RED("Rouge"),
     YELLOW("Jaune"),
     BLUE("Bleu"),
-    GREEN("Rouge"),
+    GREEN("Vert"),
     WHITE("Blanc"),
     BLACK("Noir");
 

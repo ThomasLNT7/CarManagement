@@ -1,7 +1,7 @@
 package fr.thomas.car_management.entity;
 
 public enum CarStateEnum {
-    REPARATION("En réparation"),
+    RESERVE("Réservée"),
     GARAGE("Au garage"),
     PARKING("Au parking");
 

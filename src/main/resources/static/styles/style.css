@@ -47,7 +47,7 @@ h1 {
 
 /* Liste de voitures */
 .car-list {
-    width: 300px; /* Élargir pour que les cartes aient un espace suffisant */
+    width: 320px; /* Élargir pour que les cartes aient un espace suffisant */
     min-height: 200px;
     background-color: #f7f7f7;
     border: 1px solid #ddd;
@@ -57,9 +57,10 @@ h1 {
     position: relative;
     margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    flex-wrap: wrap; /* Permet de faire revenir à la ligne */
+    gap: 10px;
 }
 
 /* Conteneur vide pour les tableaux vides */
@@ -91,11 +92,14 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     cursor: move;
-    width: 90%; /* Occuper 90% de la largeur du container */
-    text-align: center;
+    width: 75px;
+    height: 180px;
     transition: transform 0.2s ease;
     background-size: cover; /* Couvrir entièrement la carte */
     background-position: center; /* Centrer l'image */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 /* Griser le fond pendant le drag */
@@ -185,3 +189,5 @@ form button[type="submit"] {
 #extraInfo {
   transition: max-height 0.3s ease-in-out;
 }
+
+
