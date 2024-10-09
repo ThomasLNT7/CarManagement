@@ -4,28 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Détail de la voiture</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="../styles/car-details-style.css">
 </head>
 <body>
-  <div class="container">
-    <div class="car-image">
-      <img th:src="@{/../images/} + ${car.color.name().toLowerCase()} + '.png'" style="width: 100%; max-width: 150px; height: auto; object-fit: contain;" alt="Voiture Vue de Dessus">
-    </div>
-    <div class="details">
-      <h2>Marque: Tesla - Modèle: Model S</h2>
-      <div class="info">
-        <p><span>Date d'achat :</span> 01/03/2020</p>
-        <p><span>Contrôle technique :</span> 15/09/2024</p>
-        <p><span>Prochaine vidange :</span> 01/06/2024</p>
-        <p><span>État :</span> En Service</p>
-        <p><span>Couleur :</span> Rouge</p>
-      </div>
-      <div class="button-group">
-        <button><i class="fas fa-edit"></i> Modifier</button>
-        <button><i class="fas fa-trash"></i> Supprimer</button>
+<div class="container">
+  <a href="/cars" class="back-button">Retour à la liste</a>
+  <!-- Car Basic Information Section -->
+  <div class="section animated" id="basic-info">
+    <div class="header">
+      <div><i class="fas fa-car icon"></i> Informations de Base</div>
+      <div class="button-container">
+        <button class="button edit">Modifier</button>
+        <button th:href="@{/cars/delete/{id}(id=${car.id})}" class="button delete">Supprimer</button>
       </div>
     </div>
+    <ul class="list">
+      <li class="list-item"><strong>Marque :</strong> <span th:text="${car.brand ?: 'N/A'}"></span></li>
+      <li class="list-item"><strong>Modèle :</strong> <span th:text="${car.model ?: 'N/A'}"></span></li>
+      <li class="list-item"><strong>Immatriculation :</strong> <span th:text="${car.immatriculation ?: 'N/A'}"></span></li>
+      <li class="list-item"><strong>Couleur :</strong> <span th:text="${car.color ?: 'N/A'}"></span></li>
+    </ul>
   </div>
+
+  <!-- Car Important Dates Section -->
+  <div class="section animated" id="important-dates">
+    <div class="header"><i class="fas fa-calendar-alt icon"></i> Dates Importantes</div>
+    <ul class="list">
+      <li class="list-item"><strong>Date d'Achat :</strong> <span></span></li>
+      <li class="list-item"><strong>Date de Contrôle Technique :</strong> <span></span></li>
+      <li class="list-item"><strong>Date de Vidange :</strong> <span></span></li>
+    </ul>
+  </div>
+
+  <!-- Car Services Section -->
+  <div class="section animated" id="service-dates">
+    <div class="header"><i class="fas fa-wrench icon"></i> Historique des Services</div>
+    <ul class="list">
+      <li class="list-item"><strong>Dernier Service Connu :</strong> <span></span></li>
+    </ul>
+  </div>
+</div>
 
   <script src="../scripts/car-details.js"></script>
 

@@ -1,75 +1,115 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+    background-color: #e6e9ef;
+    color: #333;
     margin: 0;
     padding: 0;
 }
+
 .container {
-    max-width: 900px;
-    margin: 50px auto;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.5s;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
-.container:hover {
-    transform: scale(1.02);
-}
-.car-image {
-    background: #fafafa;
-    text-align: center;
-    padding: 30px;
-}
-.car-image img {
-    max-width: 100%;
-    height: auto;
+
+.section {
+    background-color: #ffffff;
+    padding: 20px;
     border-radius: 10px;
-    transform: rotate(90deg);
-    transition: transform 0.5s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
 }
-.car-image img:hover {
-    transform: rotate(90deg) scale(1.1);
+
+.section:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
-.details {
-    padding: 25px;
-}
-.details h2 {
-    color: #333;
-    font-weight: 700;
-    transition: color 0.3s;
-}
-.details h2:hover {
-    color: #007bff;
-}
-.details .info {
-    margin: 15px 0;
-}
-.details .info p {
-    margin: 5px 0;
-    color: #555;
-    transition: color 0.3s;
-}
-.details .info span {
-    font-weight: bold;
-    color: #444;
-}
-.button-group {
+
+.header {
+    font-size: 1.5em;
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    color: #003366;
 }
-.button-group button {
+
+.header .icon {
+    margin-right: 10px;
+    color: #007BFF;
+}
+
+.list {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.list-item {
+    margin: 5px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 5px 10px;
     border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 25px;
-    background-color: #007bff;
-    color: #fff;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease;
 }
-.button-group button:hover {
+
+.button.edit {
+    background-color: #007BFF;
+    color: white;
+}
+
+.button.edit:hover {
     background-color: #0056b3;
-    transform: translateY(-3px);
+}
+
+.button.delete {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.button.delete:hover {
+    background-color: #cc0000;
+}
+
+.animated {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
 }
