@@ -25,6 +25,24 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Style pour le bouton "Ajouter un service" */
+.button.add-service {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.button.add-service:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
 .header {
     font-size: 1.5em;
     display: flex;
@@ -52,6 +70,15 @@ body {
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
+    list-style-type: none;
+}
+
+.list-item ul {
+    list-style-type: none;
+}
+
+.list-item ul li {
+    list-style-type: none;
 }
 
 .button-container {
@@ -67,22 +94,39 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/* Bouton Modifier */
 .button.edit {
-    background-color: #007BFF;
+    background-color: #0066cc;
     color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .button.edit:hover {
-    background-color: #0056b3;
+    background-color: #00509e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* Bouton Supprimer */
 .button.delete {
-    background-color: #ff4d4d;
+    background-color: #ff4444;
     color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
 }
 
 .button.delete:hover {
     background-color: #cc0000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .animated {
@@ -113,3 +157,116 @@ body {
 .back-button:hover {
     background-color: #0056b3;
 }
+
+/* Retire les puces des listes */
+  ul.list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  ul.list-item {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .list-item {
+    margin-bottom: 20px;
+  }
+
+  /* Style du bouton */
+  .btn-details {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-details:hover {
+    background-color: #45a049;
+  }
+
+  /* Optionnel : ajouter un style à chaque bloc service */
+  .service-block {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  /* popup */
+  /* Masquer la popup par défaut */
+  .popup {
+      display: none; /* La popup est masquée par défaut */
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Fond sombre */
+      backdrop-filter: blur(5px); /* Effet de flou */
+      overflow: hidden; /* Empêche le défilement global */
+  }
+
+  /* Contenu de la popup avec défilement si nécessaire */
+  .popup-content {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 50%;
+      max-height: 80vh; /* Limiter la hauteur de la popup à 80% de la hauteur de l'écran */
+      overflow-y: auto; /* Activer le défilement vertical si le contenu dépasse */
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      position: relative;
+      margin: 5% auto; /* Centrer la popup horizontalement */
+  }
+
+  /* Bouton de fermeture (croix) */
+  .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+  }
+
+  .close-btn:hover {
+      color: red;
+  }
+
+  /* Formulaire dans la popup */
+  form label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      color: #333;
+  }
+
+  form input,
+  form select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+  }
+
+  form button[type="submit"] {
+      padding: 10px 20px;
+      background-color: #90caf9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+
+  #extraInfo {
+    transition: max-height 0.3s ease-in-out;
+  }

@@ -15,33 +15,87 @@
     <div class="header">
       <div><i class="fas fa-car icon"></i> Informations de Base</div>
       <div class="button-container">
-        <button class="button edit">Modifier</button>
-        <button th:href="@{/cars/delete/{id}(id=${car.id})}" class="button delete">Supprimer</button>
+        <a class="button edit">Modifier</a>
+        <a th:href="@{/cars/delete/{id}(id=${car.id})}" class="button delete">Supprimer</a>
       </div>
     </div>
     <ul class="list">
       <li class="list-item"><strong>Marque :</strong> <span th:text="${car.brand ?: 'N/A'}"></span></li>
       <li class="list-item"><strong>Modèle :</strong> <span th:text="${car.model ?: 'N/A'}"></span></li>
       <li class="list-item"><strong>Immatriculation :</strong> <span th:text="${car.immatriculation ?: 'N/A'}"></span></li>
-      <li class="list-item"><strong>Couleur :</strong> <span th:text="${car.color ?: 'N/A'}"></span></li>
-    </ul>
-  </div>
-
-  <!-- Car Important Dates Section -->
-  <div class="section animated" id="important-dates">
-    <div class="header"><i class="fas fa-calendar-alt icon"></i> Dates Importantes</div>
-    <ul class="list">
+      <li class="list-item"><strong>Couleur :</strong> <span th:text="${car.color.displayName ?: 'N/A'}"></span></li>
       <li class="list-item"><strong>Date d'Achat :</strong> <span></span></li>
       <li class="list-item"><strong>Date de Contrôle Technique :</strong> <span></span></li>
-      <li class="list-item"><strong>Date de Vidange :</strong> <span></span></li>
     </ul>
   </div>
 
   <!-- Car Services Section -->
   <div class="section animated" id="service-dates">
-    <div class="header"><i class="fas fa-wrench icon"></i> Historique des Services</div>
+    <div class="header">
+      <div><i class="fas fa-wrench icon"></i> Historique des Services</div>
+      <div class="button-container">
+        <a class="button add-service btn" id="openPopupBtn" type="button">Ajouter un Service</a>
+      </div>
+    </div>
+
+    <!-- Contenu de la popup -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <!-- Bouton pour fermer la popup (croix) -->
+        <span class="close-btn" id="closePopupBtn">&times;</span>
+        <h2>Ajouter un service</h2>
+
+        <!-- Formulaire d'ajout de service -->
+        <form th:action="@{/services/add/{carId}(carId=${car.id})}" method="post">
+          <label for="nomService">Nom du service :</label>
+          <select id="nomService" name="nomService" onchange="toggleZlTextField()">
+            <option th:each="serviceNom : ${serviceNames}" th:value="${serviceNom}" th:text="${serviceNom}"></option>
+          </select>
+
+          <!-- Champ zlText, caché par défaut -->
+          <div id="zlTextContainer" style="display: none; margin-top: 10px;">
+            <label for="zlText">Texte complémentaire :</label>
+            <input type="text" id="zlText" name="zlText">
+          </div>
+
+          <label for="dateDebut">Date de début :</label>
+          <input type="date" id="dateDebut" name="dateDebut" required>
+
+          <label for="dateFin">Date de fin :</label>
+          <input type="date" id="dateFin" name="dateFin">
+
+          <label for="commentaire">Commentaire :</label>
+          <input type="text" id="commentaire" name="commentaire">
+
+          <button type="submit">Ajouter</button>
+        </form>
+      </div>
+    </div>
     <ul class="list">
       <li class="list-item"><strong>Dernier Service Connu :</strong> <span></span></li>
+
+      <ul class="list">
+        <li th:each="service : ${services}" class="service-block">
+          <!-- Affiche le nom du service via l'énumération -->
+          <h3 th:text="${service.nomService.displayName}"></h3>
+
+          <!-- Affiche le texte personnalisé (zlText) -->
+          <p><strong>Description :</strong> <span th:text="${service.zlText}">Texte du service</span></p>
+
+          <!-- Affiche le commentaire -->
+          <p><strong>Commentaire :</strong> <span th:text="${service.commentaire}">Commentaire du service</span></p>
+
+          <!-- Affiche la période (date_debut - date_fin) -->
+          <p><strong>Période :</strong>
+            <span th:text="${service.dateDebut}">Date de début</span> -
+            <span th:text="${service.dateFin}">Date de fin</span>
+          </p>
+
+          <!-- Ajout du bouton "Voir en détail" -->
+          <a th:href="@{'/services/' + ${service.id}}" class="btn-details">Voir en détail</a>
+          <a th:href="@{/services/delete/{id}/{carId}(id=${service.id}, carId=${car.id})}" class="button delete">Supprimer</a>
+        </li>
+      </ul>
     </ul>
   </div>
 </div>

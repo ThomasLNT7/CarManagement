@@ -1,8 +1,7 @@
 package fr.thomas.car_management.controller;
 
-import fr.thomas.car_management.entity.Car;
-import fr.thomas.car_management.entity.CarColorEnum;
-import fr.thomas.car_management.entity.CarStateEnum;
+import fr.thomas.car_management.entity.*;
+import fr.thomas.car_management.repository.ServicesRepository;
 import fr.thomas.car_management.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,9 @@ public class CarThymeleafController {
     @Autowired
     private CarService carService;
 
+    @Autowired
+    private ServicesRepository servicesRepository;
+
     @GetMapping("/cars")
     private String getCars(Model model) {
         List<Car> cars =carService.getAllCars();
@@ -28,13 +30,19 @@ public class CarThymeleafController {
     }
 
     @GetMapping("/cars/{id}")
-    private String getBookById(@PathVariable Long id, Model model) {
+    private String getCarById(@PathVariable Long id, Model model) {
         Optional<Car> car = carService.getCarById(id);
         if (car.isPresent()) {
             model.addAttribute("car", car.get());
-            return "car-details";
+            model.addAttribute("serviceNames", ServicesNomEnum.values());
+
+            // Récupération des services triés
+            List<Services> services = servicesRepository.findAllByOrderByDateDebutAsc();
+            model.addAttribute("services", services);  // Ajout de la liste des services triés au modèle
+
+            return "car-details";  // Retourne la vue 'car-details'
         } else {
-            return "error";
+            return "error";  // En cas d'erreur, retourne la vue 'error'
         }
     }
 
@@ -57,6 +65,32 @@ public class CarThymeleafController {
         carService.updateCarState(id, state);
         return "redirect:/cars";
     }
+
+    @GetMapping("/services/delete/{id}/{carId}")
+    public String deleteService(@PathVariable Long id, @PathVariable Long carId) {
+        carService.deleteService(id); // Suppression du service
+        return "redirect:/cars/" + carId; // Redirige vers la voiture spécifique
+    }
+
+    @GetMapping("/services/add/{carId}")
+    public String showAddServiceForm(@PathVariable Long carId, Model model) {
+        // Trouve la voiture à laquelle le service sera ajouté
+        Optional<Car> car = carService.getCarById(carId);
+
+        if (!car.isPresent()) {
+            // Gérer le cas où la voiture n'existe pas
+            return "redirect:/cars"; // Rediriger vers la liste des voitures si la voiture n'est pas trouvée
+        }
+
+        // Ajouter la voiture et la liste des services possibles au modèle
+        model.addAttribute("car", car);
+        model.addAttribute("serviceNames", ServicesNomEnum.values());
+        model.addAttribute("service", new Services()); // Initialiser un nouvel objet service
+
+
+        return "redirect:/cars" + carId; // Vue contenant le formulaire pour ajouter un service
+    }
+
 
 
 }

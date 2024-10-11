@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KarMS - Gestion des Voitures</title>
+    <style>
+        /* Styles pour le burger menu flottant */
+        .burger-menu {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            z-index: 1000;
+            background-color: #87CEFA;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .burger-menu:hover {
+            background-color: #5fa6d3;
+        }
+
+        .burger-lines {
+            width: 30px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .burger-lines::before, .burger-lines::after {
+            content: '';
+            width: 30px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 2px;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .burger-lines::before {
+            transform: translateY(-10px);
+        }
+
+        .burger-lines::after {
+            transform: translateY(10px);
+        }
+
+        /* Menu déroulant */
+        .menu {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #87CEFA;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding-top: 60px;
+        }
+
+        .menu.open {
+            left: 0;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu ul li {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .menu ul li a:hover {
+            color: #0000ff;
+        }
+
+        /* Content styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Bouton Burger flottant avec fragment Thymeleaf -->
+<div th:fragment="navbar">
+    <!-- Bouton Burger flottant -->
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="burger-lines"></div>
+    </div>
+
+    <!-- Menu déroulant -->
+    <div class="menu" id="menu">
+        <ul>
+            <li><a th:href="@{/cars}">Accueil</a></li>
+            <li><a th:href="@{/cars}">Liste des voitures</a></li>
+            <li><a th:href="@{/cars}">Réserver une voiture</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Script pour gérer le menu burger -->
+<script>
+function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("open");
+}
+
+// Optionnel: fermer le menu si on clique ailleurs
+window.onclick = function(event) {
+    const menu = document.getElementById("menu");
+    const burger = document.querySelector('.burger-menu');
+    if (!menu.contains(event.target) && !burger.contains(event.target)) {
+        menu.classList.remove("open");
+    }
+};
+</script>
+
+</body>
+</html>

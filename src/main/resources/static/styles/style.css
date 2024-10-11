@@ -3,9 +3,107 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f7f7f7;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
+ /* Styles pour le burger menu flottant */
+.burger-menu {
+    margin-left: 15px;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    z-index: 1000;
+    background-color: #87CEFA;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.burger-menu:hover {
+    background-color: #5fa6d3;
+}
+
+.burger-lines {
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.burger-lines::before, .burger-lines::after {
+    content: '';
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.burger-lines::before {
+    transform: translateY(-10px);
+}
+
+.burger-lines::after {
+    transform: translateY(10px);
+}
+
+/* Menu déroulant */
+.menu {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #87CEFA;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 999;
+    padding-top: 60px;
+}
+
+.menu.open {
+    left: 0;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.menu ul li a:hover {
+    color: #0000ff;
+}
+
+/* Content styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
 /* Titre */
 h1 {
     text-align: center;

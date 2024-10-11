@@ -2,6 +2,9 @@ package fr.thomas.car_management.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="cars")
 public class Car {
@@ -14,8 +17,8 @@ public class Car {
     private String immatriculation;
     private String purchase_date;
     private String technical_control_date;
-    private String emptying_date;
-
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Services> services = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private CarStateEnum state;
 
@@ -24,15 +27,15 @@ public class Car {
 
     public Car() {}
 
-    public Car(String brand, String model, String purchase_date, String technical_control_date, String emptying_date, String state, String color, String immatriculation) {
+    public Car(String brand, String model, String purchase_date, String technical_control_date, String state, String color, String immatriculation, List<Services> services) {
         this.brand = brand;
         this.model = model;
         this.purchase_date = purchase_date;
         this.technical_control_date = technical_control_date;
-        this.emptying_date = emptying_date;
         this.state = CarStateEnum.valueOf(state);
         this.color = CarColorEnum.valueOf(String.valueOf(color));
         this.immatriculation = immatriculation;
+        this.services = services;;
     }
 
     public Long getId() {
@@ -75,14 +78,6 @@ public class Car {
         this.technical_control_date = technical_control_date;
     }
 
-    public String getEmptyingDate() {
-        return emptying_date;
-    }
-
-    public void setEmptyingDate(String emptying_date) {
-        this.emptying_date = emptying_date;
-    }
-
     public CarStateEnum getState() {
         return state;
     }
@@ -111,5 +106,11 @@ public class Car {
         this.immatriculation = immatriculation;
     }
 
+    public List<Services> getServices() {
+        return services;
+    }
 
+    public void setServices(List<Services> services) {
+        this.services = services;
+    }
 }

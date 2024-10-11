@@ -125,4 +125,20 @@ function redirectToDetail(element) {
     }
 }
 
+//menu
+
+function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("open");
+}
+
+// Optionnel: fermer le menu si on clique ailleurs
+window.onclick = function(event) {
+    const menu = document.getElementById("menu");
+    const burger = document.querySelector('.burger-menu');
+    if (!menu.contains(event.target) && !burger.contains(event.target)) {
+        menu.classList.remove("open");
+    }
+};
+
 console.log("Fin du script");

@@ -1,8 +1,9 @@
 package fr.thomas.car_management.service;
 
 import fr.thomas.car_management.entity.Car;
-import fr.thomas.car_management.entity.CarStateEnum;
+import fr.thomas.car_management.entity.Services;
 import fr.thomas.car_management.repository.CarRepository;
+import fr.thomas.car_management.repository.ServicesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class CarService {
 
     private final CarRepository carRepository;
+    private final ServicesRepository servicesRepository;
 
     @Autowired
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepository carRepository, ServicesRepository servicesRepository) {
         this.carRepository = carRepository;
+        this.servicesRepository = servicesRepository;
     }
 
     public List<Car> getAllCars() {return carRepository.findAll();}
@@ -46,4 +49,20 @@ public class CarService {
             carRepository.save(car);  // Sauvegarde la modification
         }
     }
+
+    public void addServiceToCar(Long carId, Services services) {
+        Car car = carRepository.findById(carId)
+                .orElseThrow(() -> new RuntimeException("Car not found"));
+        services.setCar_id(car);
+        servicesRepository.save(services);
+    }
+
+    public void deleteService(Long service_id) {
+        if (servicesRepository.existsById(service_id)) {
+            servicesRepository.deleteById(service_id);
+        } else {
+            throw new RuntimeException("Car not found with the id : " + service_id);
+        }
+    }
+
 }
