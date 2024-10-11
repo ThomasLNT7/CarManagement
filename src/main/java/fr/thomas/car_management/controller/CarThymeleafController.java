@@ -72,24 +72,36 @@ public class CarThymeleafController {
         return "redirect:/cars/" + carId; // Redirige vers la voiture spécifique
     }
 
-    @GetMapping("/services/add/{carId}")
-    public String showAddServiceForm(@PathVariable Long carId, Model model) {
-        // Trouve la voiture à laquelle le service sera ajouté
-        Optional<Car> car = carService.getCarById(carId);
+    @PostMapping("/{carId}/items")
+    public String addItemToProduct(@PathVariable Long carId, @ModelAttribute Services services, Model model) {
+        // Ajouter le service à la voiture
+        carService.addServiceToCar(carId, services);
 
-        if (!car.isPresent()) {
-            // Gérer le cas où la voiture n'existe pas
-            return "redirect:/cars"; // Rediriger vers la liste des voitures si la voiture n'est pas trouvée
+        // Optionnel : Ajout de la voiture dans le modèle pour la redirection si nécessaire
+        Car car = carService.getCarById(carId).orElseThrow(() -> new IllegalArgumentException("Car not found"));
+        model.addAttribute("car", car);
+
+        // Rediriger vers la page de détails de la voiture après ajout du service
+        return "redirect:/cars/" + carId;
+    }
+
+    @GetMapping("/cars/{carId}/items/add")
+    public String showAddServiceForm(@PathVariable Long carId, Model model) {
+        Optional<Car> carOptional = carService.getCarById(carId);
+
+        if (!carOptional.isPresent()) {
+            return "redirect:/cars"; // Rediriger si la voiture n'est pas trouvée
         }
 
-        // Ajouter la voiture et la liste des services possibles au modèle
+        Car car = carOptional.get();
         model.addAttribute("car", car);
-        model.addAttribute("serviceNames", ServicesNomEnum.values());
+        model.addAttribute("serviceNames", ServicesNomEnum.values()); // Liste des noms de services
         model.addAttribute("service", new Services()); // Initialiser un nouvel objet service
 
-
-        return "redirect:/cars" + carId; // Vue contenant le formulaire pour ajouter un service
+        return "redirect:/cars/" + carId; // Vue contenant le formulaire pour ajouter un service
     }
+
+
 
 
 

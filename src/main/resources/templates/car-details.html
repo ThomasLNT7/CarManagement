@@ -46,7 +46,7 @@
         <h2>Ajouter un service</h2>
 
         <!-- Formulaire d'ajout de service -->
-        <form th:action="@{/services/add/{carId}(carId=${car.id})}" method="post">
+        <form th:action="@{/{carId}/items(carId=${car.id})}" method="post">
           <label for="nomService">Nom du service :</label>
           <select id="nomService" name="nomService" onchange="toggleZlTextField()">
             <option th:each="serviceNom : ${serviceNames}" th:value="${serviceNom}" th:text="${serviceNom}"></option>
